@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import BudgetList from "./components/BudgetList";
+import ExpensesList from "./components/ExpensesList";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -45,7 +45,8 @@ export default class App extends Component {
       <>
         <Title>Your Budget</Title>
 
-        <BudgetList budgets={this.state.budgets} />
+        <ExpensesList budgets={this.state.budgets} />
+        <ExpensesList budgets={this.state.budgets} />
       </>
     );
   }

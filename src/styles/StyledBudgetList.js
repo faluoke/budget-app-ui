@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 const StyledBudgetList = styled.div`
+  background-color: lightblue;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  border-radius: 3px;
+  margin: 20px 40px;
 `;
 
 export default StyledBudgetList;

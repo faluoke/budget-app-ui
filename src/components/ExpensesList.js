@@ -1,7 +1,6 @@
 import React from "react";
-import Budget from "./Budget";
+import ExpenseItemRow from "./ExpenseItemRow";
 import StyledBudgetList from "../styles/StyledBudgetList";
-import StyledBudget from "../styles/StyledBudget";
 
 export default function budgetList(props) {
   return (
@@ -9,7 +8,7 @@ export default function budgetList(props) {
       {props.budgets.map(budget => {
         return (
           <>
-            <Budget
+            <ExpenseItemRow
               key={budget._id}
               id={budget._id}
               name={budget.name}
