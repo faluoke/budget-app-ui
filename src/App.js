@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 import ExpensesList from "./components/ExpensesList";
 
 const Title = styled.h1`
@@ -36,6 +35,24 @@ export default class App extends Component {
       });
   };
 
+  updateBudget = (name, type, amount, id) => {
+    axios
+      .put(`http://localhost:5000/api/budget/update/${id}`, {
+        name: name,
+        type: type,
+        amount: amount
+      })
+      .then(response => {
+        if (response.status === 200) {
+          this.fetchBudgets();
+          console.log(response);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchBudgets();
   }
@@ -45,8 +62,10 @@ export default class App extends Component {
       <>
         <Title>Your Budget</Title>
 
-        <ExpensesList budgets={this.state.budgets} />
-        <ExpensesList budgets={this.state.budgets} />
+        <ExpensesList
+          budgets={this.state.budgets}
+          updateBudget={this.updateBudget}
+        />
       </>
     );
   }
