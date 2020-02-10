@@ -21,4 +21,15 @@ export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   }
 `;
 
+export const StyledAddBudgetButton = styled.button`
+  border-style: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.3em;
+  color: #0091d9;
+  :hover {
+    color: #0173ab;
+  }
+`;
+
 export default StyledBudget;

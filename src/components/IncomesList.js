@@ -1,23 +1,23 @@
 import React from "react";
-import ExpenseItemRow from "./ExpenseItemRow";
+import IncomeItemRow from "./IncomeItemRow";
 import {
-  StyledBugetList,
-  StyledBudgetListHeader
+  StyledBudgetListHeader,
+  StyledBugetList
 } from "../styles/StyledBudgetsList";
 import AddBudgetItem from "./AddBudgetItem";
 
-export default function ExpensesList(props) {
+export default function IncomesList(props) {
   return (
     <StyledBugetList>
       <StyledBudgetListHeader>
-        <h1>Expenses</h1>
+        <h1>Income</h1>
         <h1>Type</h1>
         <h1>Amount</h1>
       </StyledBudgetListHeader>
       {props.budgets.map(budget => {
-        if (budget.type === "debt") {
+        if (budget.type === "income") {
           return (
-            <ExpenseItemRow
+            <IncomeItemRow
               key={budget._id}
               id={budget._id}
               name={budget.name}
