@@ -29,7 +29,9 @@ export default function IncomesList(props) {
         }
         return false;
       })}
-      <AddBudgetItem addBudget={props.addBudget}>Add</AddBudgetItem>
+      <AddBudgetItem addBudget={props.addBudget} type="income">
+        Add
+      </AddBudgetItem>
     </StyledBugetList>
   );
 }

@@ -3,7 +3,7 @@ import StyledBudget, { StyledAddBudgetButton } from "../styles/StyledBudget";
 
 export default function AddBudgetItem(props) {
   const handleOnClick = () => {
-    props.addBudget("Paycheck", "income", 0);
+    props.addBudget("Paycheck", props.type, 0);
   };
   return (
     <StyledBudget>

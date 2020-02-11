@@ -29,7 +29,9 @@ export default function ExpensesList(props) {
         }
         return false;
       })}
-      <AddBudgetItem addBudget={props.addBudget}>Add</AddBudgetItem>
+      <AddBudgetItem addBudget={props.addBudget} type="debt">
+        Add
+      </AddBudgetItem>
     </StyledBugetList>
   );
 }
