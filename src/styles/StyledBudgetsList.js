@@ -6,7 +6,6 @@ export const StyledBugetList = styled.div`
     0 6px 20px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin: 20px 40px;
-  overflow: hidden;
 `;
 
 export const StyledBudgetListHeader = styled.header`
