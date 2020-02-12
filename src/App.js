@@ -20,7 +20,7 @@ export default class App extends Component {
 
   fetchBudgets = () => {
     axios
-      .get("http://localhost:5000/api/budgets")
+      .get("https://master-budget-app.herokuapp.com/api/budgets")
       .then(response => {
         if (response.data) {
           let budgetsClone = this.state.budgets.slice();
@@ -38,7 +38,7 @@ export default class App extends Component {
 
   addBudget = (name, type, amount) => {
     axios
-      .post("http://localhost:5000/api/budget/create", {
+      .post("https://master-budget-app.herokuapp.com/api/budget/create", {
         name: name,
         type: type,
         amount: amount
@@ -55,7 +55,7 @@ export default class App extends Component {
 
   updateBudget = (name, type, amount, id) => {
     axios
-      .put(`http://localhost:5000/api/budget/update/${id}`, {
+      .put(`https://master-budget-app.herokuapp.com/api/budget/update/${id}`, {
         name: name,
         type: type,
         amount: amount
@@ -73,7 +73,7 @@ export default class App extends Component {
 
   deleteBudget = id => {
     axios
-      .delete(`http://localhost:5000/api/budget/delete/${id}`)
+      .delete(`https://master-budget-app.herokuapp.com/api/budget/delete/${id}`)
       .then(response => {
         if (response.status === 200) {
           this.fetchBudgets();
