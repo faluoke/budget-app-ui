@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 const StyledBudget = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 10px;
 `;
 
 export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   border-style: none;
+  padding: 15px;
   font-size: 1.2em;
   :hover {
     background: #f4f4f4;
@@ -26,6 +27,7 @@ export const StyledButton = styled.button`
   background: none;
   cursor: pointer;
   font-size: 1.3em;
+  margin: 0;
   color: #0091d9;
   :hover {
     color: #0173ab;

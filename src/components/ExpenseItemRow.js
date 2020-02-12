@@ -8,6 +8,9 @@ export default function ExpenseItemRow(props) {
     type: props.type,
     amount: props.amount
   });
+  const [active, setActive] = useState({
+    status: ""
+  });
   const handleInputChange = event => {
     const { name, value } = event.target;
     const clone = { ...inputs };
@@ -23,11 +26,24 @@ export default function ExpenseItemRow(props) {
     }
   };
 
-  return (
-    <StyledBudget>
-      <div>
+  const handleDivOnClick = () => {
+    setActive({ status: "active" });
+  };
+
+  const displayDeleteButton = () => {
+    if (active.status === "active") {
+      return (
         <DeleteBudgetItem deleteBudget={props.deleteBudget} id={props.id} />
-      </div>
+      );
+    } else {
+      return false;
+    }
+  };
+
+  return (
+    <StyledBudget onClick={handleDivOnClick}>
+      {displayDeleteButton()}
+
       <div>
         <StyledBudgetInputs
           name="name"
