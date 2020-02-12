@@ -23,6 +23,9 @@ export default function ExpenseItemRow(props) {
   const handleInputOnBlur = event => {
     if (event.target.value !== props[event.target.name]) {
       props.updateBudget(inputs.name, inputs.type, inputs.amount, props.id);
+      setActive({
+        statue: ""
+      });
     }
   };
 
