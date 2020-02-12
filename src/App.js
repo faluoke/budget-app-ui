@@ -71,6 +71,20 @@ export default class App extends Component {
       });
   };
 
+  deleteBudget = id => {
+    axios
+      .delete(`http://localhost:5000/api/budget/delete/${id}`)
+      .then(response => {
+        if (response.status === 200) {
+          this.fetchBudgets();
+          console.log(response);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchBudgets();
   }
@@ -83,11 +97,13 @@ export default class App extends Component {
           budgets={this.state.budgets}
           addBudget={this.addBudget}
           updateBudget={this.updateBudget}
+          deleteBudget={this.deleteBudget}
         />
         <ExpensesList
           budgets={this.state.budgets}
           addBudget={this.addBudget}
           updateBudget={this.updateBudget}
+          deleteBudget={this.deleteBudget}
         />
       </>
     );

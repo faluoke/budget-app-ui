@@ -2,14 +2,8 @@ import styled from "styled-components";
 
 const StyledBudget = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 10px;
-  padding: ${props =>
-    props.active
-      ? "-300px"
-      : `
-    "0"
-  `};
 `;
 
 export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
@@ -27,7 +21,7 @@ export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   }
 `;
 
-export const StyledAddBudgetButton = styled.button`
+export const StyledButton = styled.button`
   border-style: none;
   background: none;
   cursor: pointer;

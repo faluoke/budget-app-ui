@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StyledBudget, { StyledBudgetInputs } from "../styles/StyledBudget";
+import DeleteBudgetItem from "./DeleteBudgetItem";
 
 export default function ExpenseItemRow(props) {
   const [inputs, setInputs] = useState({
@@ -7,9 +8,7 @@ export default function ExpenseItemRow(props) {
     type: props.type,
     amount: props.amount
   });
-  const [active, setActive] = useState({
-    status: ""
-  });
+  const [active, setActive] = useState("");
   const handleInputChange = event => {
     const { name, value } = event.target;
     const clone = { ...inputs };
@@ -31,6 +30,9 @@ export default function ExpenseItemRow(props) {
 
   return (
     <StyledBudget onClick={handleDivOnClick} active={active.status}>
+      <div>
+        <DeleteBudgetItem deleteBudget={props.deleteBudget} id={props.id} />
+      </div>
       <div>
         <StyledBudgetInputs
           name="name"

@@ -3,12 +3,12 @@ import StyledBudget, { StyledButton } from "../styles/StyledBudget";
 
 export default function AddBudgetItem(props) {
   const handleOnClick = () => {
-    props.addBudget("Paycheck", props.type, 0);
+    props.deleteBudget(props.id);
   };
   return (
     <StyledBudget>
       <div>
-        <StyledButton onClick={handleOnClick}>Add Item</StyledButton>
+        <StyledButton onClick={handleOnClick}>Delete</StyledButton>
       </div>
     </StyledBudget>
   );
