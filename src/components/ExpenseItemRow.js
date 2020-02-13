@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import StyledBudget, { StyledBudgetInputs } from "../styles/StyledBudget";
+import StyledBudget, {
+  StyledBudgetInputs,
+  StyledSpan
+} from "../styles/StyledBudget";
 import DeleteBudgetItem from "./DeleteBudgetItem";
 
 export default function ExpenseItemRow(props) {
   const [inputs, setInputs] = useState({
     name: props.name,
     type: props.type,
-    amount: props.amount
+    planned: props.planned,
+    received: props.received
   });
   const [active, setActive] = useState({
     status: ""
@@ -58,22 +62,22 @@ export default function ExpenseItemRow(props) {
       </div>
       <div>
         <StyledBudgetInputs
-          name="type"
-          value={inputs.type}
+          name="planned"
+          value={inputs.planned}
           onChange={event => handleInputChange(event)}
           onFocus={handleInputOnFocus}
           onBlur={handleInputOnBlur}
         />
       </div>
-      <div>
-        <StyledBudgetInputs
-          name="amount"
-          value={inputs.amount}
-          onChange={event => handleInputChange(event)}
-          onFocus={handleInputOnFocus}
-          onBlur={handleInputOnBlur}
-        />
-      </div>
+      <StyledSpan
+        name="received"
+        value={inputs.received}
+        onChange={event => handleInputChange(event)}
+        onFocus={handleInputOnFocus}
+        onBlur={handleInputOnBlur}
+      >
+        {inputs.received}
+      </StyledSpan>
     </StyledBudget>
   );
 }

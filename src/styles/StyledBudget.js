@@ -22,6 +22,11 @@ export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   }
 `;
 
+export const StyledSpan = styled.span`
+  margin-top: 10px;
+  font-size: 1.3rem;
+`;
+
 export const StyledButton = styled.button`
   border-style: none;
   background: none;

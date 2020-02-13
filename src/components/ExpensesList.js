@@ -22,7 +22,8 @@ export default function ExpensesList(props) {
               id={budget._id}
               name={budget.name}
               type={budget.type}
-              amount={budget.amount.toString()}
+              planned={budget.planned.toString()}
+              received={budget.received.toString()}
               updateBudget={props.updateBudget}
               deleteBudget={props.deleteBudget}
             />

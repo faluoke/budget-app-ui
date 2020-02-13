@@ -37,12 +37,13 @@ export default class App extends Component {
       });
   };
 
-  addBudget = (name, type, amount) => {
+  addBudget = (name, type, planned, received) => {
     axios
       .post("https://master-budget-app.herokuapp.com/api/budget/create", {
         name: name,
         type: type,
-        amount: amount
+        planned: planned,
+        received: received
       })
       .then(response => {
         if (response.status === 201) {
@@ -54,12 +55,13 @@ export default class App extends Component {
       });
   };
 
-  updateBudget = (name, type, amount, id) => {
+  updateBudget = (name, type, planned, received, id) => {
     axios
       .put(`https://master-budget-app.herokuapp.com/api/budget/update/${id}`, {
         name: name,
         type: type,
-        amount: amount
+        planned: planned,
+        received: received
       })
       .then(response => {
         if (response.status === 200) {
