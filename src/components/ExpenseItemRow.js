@@ -69,15 +69,15 @@ export default function ExpenseItemRow(props) {
           onBlur={handleInputOnBlur}
         />
       </div>
-      <StyledSpan
-        name="received"
-        value={inputs.received}
-        onChange={event => handleInputChange(event)}
-        onFocus={handleInputOnFocus}
-        onBlur={handleInputOnBlur}
-      >
-        {inputs.received}
-      </StyledSpan>
+      <div>
+        <StyledBudgetInputs
+          name="received"
+          value={inputs.received}
+          onChange={event => handleInputChange(event)}
+          onFocus={handleInputOnFocus}
+          onBlur={handleInputOnBlur}
+        />
+      </div>
     </StyledBudget>
   );
 }

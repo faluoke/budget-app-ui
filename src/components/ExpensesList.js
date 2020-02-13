@@ -11,8 +11,8 @@ export default function ExpensesList(props) {
     <StyledBugetList>
       <StyledBudgetListHeader>
         <h1>Expenses</h1>
-        <h1>Type</h1>
-        <h1>Amount</h1>
+        <h1>Planned</h1>
+        <h1>Received</h1>
       </StyledBudgetListHeader>
       {props.budgets.map(budget => {
         if (budget.type === "debt") {
