@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import StyledBudget, {
-  StyledBudgetInputs,
-  StyledSpan
-} from "../styles/StyledBudget";
+import StyledBudget, { StyledBudgetInputs } from "../styles/StyledBudget";
 import DeleteBudgetItem from "./DeleteBudgetItem";
 
 export default function ExpenseItemRow(props) {

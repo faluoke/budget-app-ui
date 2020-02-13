@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ExpenseItemRow from "./ExpenseItemRow";
 import {
   StyledBugetList,
@@ -12,7 +12,7 @@ export default function ExpensesList(props) {
       <StyledBudgetListHeader>
         <h1>Expenses</h1>
         <h1>Planned</h1>
-        <h1>Received</h1>
+        <h1>Spent</h1>
       </StyledBudgetListHeader>
       {props.budgets.map(budget => {
         if (budget.type === "debt") {
