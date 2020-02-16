@@ -15,7 +15,7 @@ export default class App extends Component {
     super();
     this.state = {
       budgets: [],
-      status: ""
+      loading: true
     };
   }
 
@@ -24,6 +24,9 @@ export default class App extends Component {
       .get("https://master-budget-app.herokuapp.com/api/budgets")
       .then(response => {
         if (response.data) {
+          this.setState({
+            loading: false
+          });
           let budgetsClone = this.state.budgets.slice();
           budgetsClone = response.data;
           this.setState({
@@ -97,12 +100,14 @@ export default class App extends Component {
       <>
         <Title>Your Budget</Title>
         <IncomesList
+          loading={this.state.loading}
           budgets={this.state.budgets}
           addBudget={this.addBudget}
           updateBudget={this.updateBudget}
           deleteBudget={this.deleteBudget}
         />
         <ExpensesList
+          loading={this.state.loading}
           budgets={this.state.budgets}
           addBudget={this.addBudget}
           updateBudget={this.updateBudget}
