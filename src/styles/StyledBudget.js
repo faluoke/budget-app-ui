@@ -3,7 +3,9 @@ import styled from "styled-components";
 const StyledBudget = styled.div`
   display: flex;
   justify-content: space-around;
+  position: relative;
   margin: 10px;
+  z-index: 1;
 `;
 
 export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
