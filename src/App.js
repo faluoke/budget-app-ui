@@ -24,13 +24,11 @@ export default class App extends Component {
       .get("https://master-budget-app.herokuapp.com/api/budgets")
       .then(response => {
         if (response.data) {
-          this.setState({
-            loading: false
-          });
           let budgetsClone = this.state.budgets.slice();
           budgetsClone = response.data;
           this.setState({
-            budgets: budgetsClone
+            budgets: budgetsClone,
+            loading: false
           });
           console.log(this.state.budgets);
         }
