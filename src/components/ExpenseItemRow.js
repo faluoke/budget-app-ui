@@ -50,8 +50,23 @@ export default function ExpenseItemRow(props) {
     }
   };
 
+  const onSetBudgetItemId = () => {
+    props.handleSetBudgetItemId(
+      props.id,
+      props.name,
+      props.planned,
+      props.received,
+      props.type
+    );
+  };
+
   return (
-    <StyledBudget onClick={handleDivOnClick}>
+    <StyledBudget
+      onClick={() => {
+        handleDivOnClick();
+        onSetBudgetItemId();
+      }}
+    >
       {displayDeleteButton()}
 
       <div>

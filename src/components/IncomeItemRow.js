@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StyledBudget, { StyledBudgetInputs } from "../styles/StyledBudget";
 import DeleteBudgetItem from "./DeleteBudgetItem";
+import BudgetDetail from "./BudgetDetail";
 
 export default function ExpenseItemRow(props) {
   const [inputs, setInputs] = useState({
@@ -40,6 +41,7 @@ export default function ExpenseItemRow(props) {
     setActive({
       status: "active"
     });
+    return <BudgetDetail />;
   };
 
   const displayDeleteButton = () => {
@@ -50,8 +52,23 @@ export default function ExpenseItemRow(props) {
     }
   };
 
+  const onSetBudgetItemId = () => {
+    props.handleSetBudgetItemId(
+      props.id,
+      props.name,
+      props.planned,
+      props.received,
+      props.type
+    );
+  };
+
   return (
-    <StyledBudget onClick={handleDivClick}>
+    <StyledBudget
+      onClick={() => {
+        handleDivClick();
+        onSetBudgetItemId();
+      }}
+    >
       {displayDeleteButton()}
       <div>
         <StyledBudgetInputs

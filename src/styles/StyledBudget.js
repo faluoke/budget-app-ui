@@ -10,8 +10,10 @@ const StyledBudget = styled.div`
 
 export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   border-style: none;
-  padding: 15px;
+  padding: 10px;
   font-size: 1.2em;
+  border-radius: 4px;
+  width: 50%;
   :hover {
     background: #f4f4f4;
     border: lightblue;
@@ -24,10 +26,10 @@ export const StyledBudgetInputs = styled.input.attrs({ type: "text" })`
   }
 `;
 
-export const StyledSpan = styled.span`
-  margin-top: 10px;
-  font-size: 1.3rem;
-`;
+// export const StyledSpan = styled.span`
+//   margin-top: 10px;
+//   font-size: 1.3rem;
+// `;
 
 export const StyledButton = styled.button`
   border-style: none;

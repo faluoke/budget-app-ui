@@ -30,6 +30,7 @@ export default function ExpensesList(props) {
                 received={budget.received.toString()}
                 updateBudget={props.updateBudget}
                 deleteBudget={props.deleteBudget}
+                handleSetBudgetItemId={props.handleSetBudgetItemId}
               />
             );
           }

@@ -3,6 +3,9 @@ import axios from "axios";
 import styled from "styled-components";
 import IncomesList from "./components/IncomesList";
 import ExpensesList from "./components/ExpensesList";
+import BudgetDetail from "./components/BudgetDetail";
+import Transactions from "./components/Transactions";
+import { FlexColumn } from "./styles/StyledBudgetDetail";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -10,12 +13,17 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
+const BudgetContainer = styled.div`
+  display: flex;
+`;
+
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       budgets: [],
-      loading: true
+      loading: true,
+      budgetItem: {}
     };
   }
 
@@ -89,6 +97,18 @@ export default class App extends Component {
       });
   };
 
+  handleSetBudgetItemId = (id, name, planned, received, type) => {
+    this.setState({
+      budgetItem: {
+        id,
+        name,
+        planned,
+        received,
+        type
+      }
+    });
+  };
+
   componentDidMount() {
     this.fetchBudgets();
   }
@@ -97,20 +117,30 @@ export default class App extends Component {
     return (
       <>
         <Title>Your Budget</Title>
-        <IncomesList
-          loading={this.state.loading}
-          budgets={this.state.budgets}
-          addBudget={this.addBudget}
-          updateBudget={this.updateBudget}
-          deleteBudget={this.deleteBudget}
-        />
-        <ExpensesList
-          loading={this.state.loading}
-          budgets={this.state.budgets}
-          addBudget={this.addBudget}
-          updateBudget={this.updateBudget}
-          deleteBudget={this.deleteBudget}
-        />
+        <BudgetContainer>
+          <div>
+            <IncomesList
+              loading={this.state.loading}
+              budgets={this.state.budgets}
+              addBudget={this.addBudget}
+              updateBudget={this.updateBudget}
+              deleteBudget={this.deleteBudget}
+              handleSetBudgetItemId={this.handleSetBudgetItemId}
+            />
+            <ExpensesList
+              loading={this.state.loading}
+              budgets={this.state.budgets}
+              addBudget={this.addBudget}
+              updateBudget={this.updateBudget}
+              deleteBudget={this.deleteBudget}
+              handleSetBudgetItemId={this.handleSetBudgetItemId}
+            />
+          </div>
+          <FlexColumn>
+            <BudgetDetail id={this.state.budgetItem} />
+            <Transactions />
+          </FlexColumn>
+        </BudgetContainer>
       </>
     );
   }
