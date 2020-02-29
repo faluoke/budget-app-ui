@@ -22,10 +22,13 @@ export default class App extends Component {
     super();
     this.state = {
       budgets: [],
+      transactions: [],
       loading: true,
-      budgetItem: {}
+      budgetItem: ""
     };
   }
+
+  //budgets
 
   fetchBudgets = () => {
     axios
@@ -109,8 +112,30 @@ export default class App extends Component {
     });
   };
 
+  // Transactions
+
+  fetchTransactions = () => {
+    axios
+      .get("https://master-budget-app.herokuapp.com/api/transactions")
+      .then(response => {
+        if (response.data) {
+          let transactionsClone = this.state.transactions.slice();
+          transactionsClone = response.data;
+          this.setState({
+            transactions: transactionsClone,
+            loading: false
+          });
+          console.log(this.state.transactions);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchBudgets();
+    this.fetchTransactions();
   }
 
   render() {
@@ -137,8 +162,12 @@ export default class App extends Component {
             />
           </div>
           <FlexColumn>
-            <BudgetDetail id={this.state.budgetItem} />
-            <Transactions />
+            {this.state.budgetItem === "" ? (
+              ""
+            ) : (
+              <BudgetDetail id={this.state.budgetItem} />
+            )}
+            <Transactions transactions={this.state.transactions} />
           </FlexColumn>
         </BudgetContainer>
       </>

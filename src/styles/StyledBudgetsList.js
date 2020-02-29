@@ -12,6 +12,8 @@ export const StyledBugetList = styled.div`
 export const StyledBudgetListHeader = styled.header`
   display: flex;
   justify-content: space-around;
+  max-hight: 25%;
+  overflow: auto;
 `;
 
 export const StyledBudgetDetailH3 = styled.h3`

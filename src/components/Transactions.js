@@ -5,12 +5,28 @@ import {
   StyledBudgetDetailH3
 } from "../styles/StyledBudgetsList";
 
+import AddTransactions from "./AddTransactions";
+
 export default function BudgetDetail(props) {
   return (
-    <StyledBugetList>
+    <StyledBugetList className="transactions">
       <StyledBudgetListHeader>
-        <StyledBudgetDetailH3>Transactions</StyledBudgetDetailH3>
+        <StyledBudgetDetailH3>
+          {props.transactions.length} Transactions
+        </StyledBudgetDetailH3>
+        <StyledBudgetDetailH3>
+          <AddTransactions />
+        </StyledBudgetDetailH3>
       </StyledBudgetListHeader>
+      <ul>
+        {props.transactions.map(transaction => {
+          return (
+            <li key={transaction._id}>
+              {transaction.name} - ${transaction.amount}
+            </li>
+          );
+        })}
+      </ul>
     </StyledBugetList>
   );
 }
