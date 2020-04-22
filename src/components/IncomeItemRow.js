@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import StyledBudget, { StyledBudgetInputs } from "../styles/StyledBudget";
 import DeleteBudgetItem from "./DeleteBudgetItem";
-import BudgetDetail from "./BudgetDetail";
 
-export default function ExpenseItemRow(props) {
+export default function IncomeItemRow(props) {
+  let total = 0;
   const [inputs, setInputs] = useState({
     name: props.name,
     type: props.type,
@@ -41,7 +41,7 @@ export default function ExpenseItemRow(props) {
     setActive({
       status: "active"
     });
-    return <BudgetDetail />;
+    props.onStatusChange("active");
   };
 
   const displayDeleteButton = () => {
@@ -91,7 +91,9 @@ export default function ExpenseItemRow(props) {
       <div>
         <StyledBudgetInputs
           name="received"
-          value={inputs.received}
+          value={props.transactions.map(transaction => {
+            return (total = Number(total) + Number(transaction.amount));
+          })}
           onChange={event => handleInputChange(event)}
           onFocus={handleInputOnFocus}
           onBlur={handleInputOnBlur}

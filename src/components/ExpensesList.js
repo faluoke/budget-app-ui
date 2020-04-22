@@ -22,6 +22,8 @@ export default function ExpensesList(props) {
           if (budget.type === "debt" && props.loading === false) {
             return (
               <ExpenseItemRow
+                onStatusChange={props.onStatusChange}
+                status={props.status}
                 key={budget._id}
                 id={budget._id}
                 name={budget.name}

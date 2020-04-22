@@ -6,6 +6,7 @@ import ExpensesList from "./components/ExpensesList";
 import BudgetDetail from "./components/BudgetDetail";
 import Transactions from "./components/Transactions";
 import { FlexColumn } from "./styles/StyledBudgetDetail";
+import ModalLauncher from "./components/ModalLauncher";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -15,6 +16,7 @@ const Title = styled.h1`
 
 const BudgetContainer = styled.div`
   display: flex;
+  z-index= -1;
 `;
 
 export default class App extends Component {
@@ -24,9 +26,21 @@ export default class App extends Component {
       budgets: [],
       transactions: [],
       loading: true,
-      budgetItem: ""
+      budgetItem: "",
+      //status is active when a budget item is clicked on and empty when is not clicked
+      status: ""
     };
   }
+
+  // manage state
+
+  onStatusChange = value => {
+    if (this.state.status === "") {
+      this.setState({
+        status: value
+      });
+    }
+  };
 
   //budgets
 
@@ -100,6 +114,7 @@ export default class App extends Component {
       });
   };
 
+  // sets the budget item that has been clicked on
   handleSetBudgetItemId = (id, name, planned, received, type) => {
     this.setState({
       budgetItem: {
@@ -133,6 +148,25 @@ export default class App extends Component {
       });
   };
 
+  addTransaction = (name, type, amount, id) => {
+    debugger;
+    axios
+      .post("https://master-budget-app.herokuapp.com/api/transaction/create", {
+        name,
+        type,
+        amount,
+        budgetId: id
+      })
+      .then(response => {
+        if (response.status === 201) {
+          this.fetchTransactions();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchBudgets();
     this.fetchTransactions();
@@ -145,20 +179,26 @@ export default class App extends Component {
         <BudgetContainer>
           <div>
             <IncomesList
+              onStatusChange={this.onStatusChange}
+              status={this.state.status}
               loading={this.state.loading}
               budgets={this.state.budgets}
               addBudget={this.addBudget}
               updateBudget={this.updateBudget}
               deleteBudget={this.deleteBudget}
               handleSetBudgetItemId={this.handleSetBudgetItemId}
+              transactions={this.state.transactions}
             />
             <ExpensesList
+              onStatusChange={this.onStatusChange}
+              status={this.state.status}
               loading={this.state.loading}
               budgets={this.state.budgets}
               addBudget={this.addBudget}
               updateBudget={this.updateBudget}
               deleteBudget={this.deleteBudget}
               handleSetBudgetItemId={this.handleSetBudgetItemId}
+              transactions={this.state.transactions}
             />
           </div>
           <FlexColumn>
@@ -167,7 +207,12 @@ export default class App extends Component {
             ) : (
               <BudgetDetail id={this.state.budgetItem} />
             )}
-            <Transactions transactions={this.state.transactions} />
+            <Transactions
+              status={this.state.status}
+              budgetItem={this.state.budgetItem}
+              transactions={this.state.transactions}
+              addTransaction={this.addTransaction}
+            />
           </FlexColumn>
         </BudgetContainer>
       </>

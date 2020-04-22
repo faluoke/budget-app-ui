@@ -22,6 +22,8 @@ export default function IncomesList(props) {
           if (budget.type === "income" && props.loading === false) {
             return (
               <IncomeItemRow
+                onStatusChange={props.onStatusChange}
+                status={props.status}
                 key={budget._id}
                 id={budget._id}
                 name={budget.name}
@@ -31,6 +33,9 @@ export default function IncomesList(props) {
                 updateBudget={props.updateBudget}
                 deleteBudget={props.deleteBudget}
                 handleSetBudgetItemId={props.handleSetBudgetItemId}
+                transactions={props.transactions.filter(transaction => {
+                  return transaction.budgetId === budget._id;
+                })}
               />
             );
           }

@@ -38,6 +38,7 @@ export default function ExpenseItemRow(props) {
 
   const handleDivOnClick = () => {
     setActive({ status: "active" });
+    props.onStatusChange("active");
   };
 
   const displayDeleteButton = () => {
