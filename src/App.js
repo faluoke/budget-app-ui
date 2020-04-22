@@ -6,6 +6,7 @@ import ExpensesList from "./components/ExpensesList";
 import BudgetDetail from "./components/BudgetDetail";
 import Transactions from "./components/Transactions";
 import { FlexColumn } from "./styles/StyledBudgetDetail";
+import "./App.sass";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -130,6 +131,7 @@ export default class App extends Component {
     let total = 0;
     transactions.map((transaction) => {
       total = Number(total) + Number(transaction.amount);
+      return true;
     });
     return total;
   };
@@ -194,6 +196,8 @@ export default class App extends Component {
     this.fetchBudgets();
     this.fetchTransactions();
   }
+
+  onClick() {}
 
   render() {
     return (

@@ -8,7 +8,7 @@ import DeleteTransactionItem from "./DeleteTransactionItem";
 
 import AddTransactions from "./AddTransactions";
 
-export default function BudgetDetail(props) {
+export default function Transactions(props) {
   let transactionCount = "";
 
   const displayAddButton = () => {
