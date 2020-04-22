@@ -2,7 +2,7 @@ import React from "react";
 import IncomeItemRow from "./IncomeItemRow";
 import {
   StyledBudgetListHeader,
-  StyledBugetList
+  StyledBugetList,
 } from "../styles/StyledBudgetsList";
 import AddBudgetItem from "./AddBudgetItem";
 import LoadingSpinner from "./LoadingSpinner";
@@ -18,7 +18,7 @@ export default function IncomesList(props) {
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        props.budgets.map(budget => {
+        props.budgets.map((budget) => {
           if (budget.type === "income" && props.loading === false) {
             return (
               <IncomeItemRow
@@ -33,7 +33,8 @@ export default function IncomesList(props) {
                 updateBudget={props.updateBudget}
                 deleteBudget={props.deleteBudget}
                 handleSetBudgetItemId={props.handleSetBudgetItemId}
-                transactions={props.transactions.filter(transaction => {
+                calculateTotal={props.calculateTotal}
+                transactions={props.transactions.filter((transaction) => {
                   return transaction.budgetId === budget._id;
                 })}
               />

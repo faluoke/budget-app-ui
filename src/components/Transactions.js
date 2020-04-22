@@ -2,8 +2,9 @@ import React from "react";
 import {
   StyledBugetList,
   StyledBudgetListHeader,
-  StyledBudgetDetailH3
+  StyledBudgetDetailH3,
 } from "../styles/StyledBudgetsList";
+import DeleteTransactionItem from "./DeleteTransactionItem";
 
 import AddTransactions from "./AddTransactions";
 
@@ -30,7 +31,7 @@ export default function BudgetDetail(props) {
         <StyledBudgetDetailH3>{displayAddButton()}</StyledBudgetDetailH3>
       </StyledBudgetListHeader>
       <ul>
-        {props.transactions.map(transaction => {
+        {props.transactions.map((transaction) => {
           if (props.budgetItem === "") {
             transactionCount = props.transactions.length;
             return (
@@ -39,18 +40,20 @@ export default function BudgetDetail(props) {
               </li>
             );
           } else if (props.budgetItem.id === transaction.budgetId) {
-            debugger;
             transactionCount = props.budgetItem.length;
             return (
               <li key={transaction._id}>
                 {transaction.name} - ${transaction.amount}
+                <DeleteTransactionItem
+                  deleteTransaction={props.deleteTransaction}
+                  id={transaction._id}
+                />
               </li>
             );
           } else {
             return null;
           }
         })}
-        {/* {displayTransactions()} */}
       </ul>
     </StyledBugetList>
   );

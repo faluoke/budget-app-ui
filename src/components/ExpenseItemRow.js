@@ -7,31 +7,31 @@ export default function ExpenseItemRow(props) {
     name: props.name,
     type: props.type,
     planned: props.planned,
-    received: props.received
+    received: props.received,
   });
   const [active, setActive] = useState({
-    status: ""
+    status: "",
   });
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     const clone = { ...inputs };
     clone[name] = value;
     setInputs(clone);
   };
-  const handleInputOnFocus = event => {
+  const handleInputOnFocus = (event) => {
     event.target.select();
   };
-  const handleInputOnBlur = event => {
+  const handleInputOnBlur = (event) => {
     if (event.target.value !== props[event.target.name]) {
       props.updateBudget(
         inputs.name,
         inputs.type,
         inputs.planned,
-        inputs.received,
+        props.calculateTotal(props.transactions),
         props.id
       );
       setActive({
-        statue: ""
+        statue: "",
       });
     }
   };
@@ -56,7 +56,7 @@ export default function ExpenseItemRow(props) {
       props.id,
       props.name,
       props.planned,
-      props.received,
+      props.calculateTotal(props.transactions),
       props.type
     );
   };
@@ -74,7 +74,7 @@ export default function ExpenseItemRow(props) {
         <StyledBudgetInputs
           name="name"
           value={inputs.name}
-          onChange={event => handleInputChange(event)}
+          onChange={(event) => handleInputChange(event)}
           onFocus={handleInputOnFocus}
           onBlur={handleInputOnBlur}
         />
@@ -83,7 +83,7 @@ export default function ExpenseItemRow(props) {
         <StyledBudgetInputs
           name="planned"
           value={inputs.planned}
-          onChange={event => handleInputChange(event)}
+          onChange={(event) => handleInputChange(event)}
           onFocus={handleInputOnFocus}
           onBlur={handleInputOnBlur}
         />
@@ -91,10 +91,8 @@ export default function ExpenseItemRow(props) {
       <div>
         <StyledBudgetInputs
           name="received"
-          value={inputs.received}
-          onChange={event => handleInputChange(event)}
-          onFocus={handleInputOnFocus}
-          onBlur={handleInputOnBlur}
+          value={`$${props.calculateTotal(props.transactions)}`}
+          onChange={(event) => handleInputChange(event)}
         />
       </div>
     </StyledBudget>

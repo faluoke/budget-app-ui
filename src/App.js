@@ -6,7 +6,6 @@ import ExpensesList from "./components/ExpensesList";
 import BudgetDetail from "./components/BudgetDetail";
 import Transactions from "./components/Transactions";
 import { FlexColumn } from "./styles/StyledBudgetDetail";
-import ModalLauncher from "./components/ModalLauncher";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -28,16 +27,16 @@ export default class App extends Component {
       loading: true,
       budgetItem: "",
       //status is active when a budget item is clicked on and empty when is not clicked
-      status: ""
+      status: "",
     };
   }
 
   // manage state
 
-  onStatusChange = value => {
+  onStatusChange = (value) => {
     if (this.state.status === "") {
       this.setState({
-        status: value
+        status: value,
       });
     }
   };
@@ -47,18 +46,18 @@ export default class App extends Component {
   fetchBudgets = () => {
     axios
       .get("https://master-budget-app.herokuapp.com/api/budgets")
-      .then(response => {
+      .then((response) => {
         if (response.data) {
           let budgetsClone = this.state.budgets.slice();
           budgetsClone = response.data;
           this.setState({
             budgets: budgetsClone,
-            loading: false
+            loading: false,
           });
           console.log(this.state.budgets);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -69,14 +68,14 @@ export default class App extends Component {
         name: name,
         type: type,
         planned: planned,
-        received: received
+        received: received,
       })
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           this.fetchBudgets();
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -87,29 +86,29 @@ export default class App extends Component {
         name: name,
         type: type,
         planned: planned,
-        received: received
+        received: received,
       })
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           this.fetchBudgets();
           console.log(response);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  deleteBudget = id => {
+  deleteBudget = (id) => {
     axios
       .delete(`https://master-budget-app.herokuapp.com/api/budget/delete/${id}`)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           this.fetchBudgets();
           console.log(response);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -122,9 +121,17 @@ export default class App extends Component {
         name,
         planned,
         received,
-        type
-      }
+        type,
+      },
     });
+  };
+
+  calculateTotal = (transactions) => {
+    let total = 0;
+    transactions.map((transaction) => {
+      total = Number(total) + Number(transaction.amount);
+    });
+    return total;
   };
 
   // Transactions
@@ -132,18 +139,18 @@ export default class App extends Component {
   fetchTransactions = () => {
     axios
       .get("https://master-budget-app.herokuapp.com/api/transactions")
-      .then(response => {
+      .then((response) => {
         if (response.data) {
           let transactionsClone = this.state.transactions.slice();
           transactionsClone = response.data;
           this.setState({
             transactions: transactionsClone,
-            loading: false
+            loading: false,
           });
           console.log(this.state.transactions);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -155,14 +162,30 @@ export default class App extends Component {
         name,
         type,
         amount,
-        budgetId: id
+        budgetId: id,
       })
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           this.fetchTransactions();
         }
       })
-      .catch(err => {
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  deleteTransaction = (id) => {
+    axios
+      .delete(
+        `https://master-budget-app.herokuapp.com/api/transaction/delete/${id}`
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          this.fetchTransactions();
+          console.log(response);
+        }
+      })
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -187,6 +210,7 @@ export default class App extends Component {
               updateBudget={this.updateBudget}
               deleteBudget={this.deleteBudget}
               handleSetBudgetItemId={this.handleSetBudgetItemId}
+              calculateTotal={this.calculateTotal}
               transactions={this.state.transactions}
             />
             <ExpensesList
@@ -198,6 +222,7 @@ export default class App extends Component {
               updateBudget={this.updateBudget}
               deleteBudget={this.deleteBudget}
               handleSetBudgetItemId={this.handleSetBudgetItemId}
+              calculateTotal={this.calculateTotal}
               transactions={this.state.transactions}
             />
           </div>
@@ -212,6 +237,7 @@ export default class App extends Component {
               budgetItem={this.state.budgetItem}
               transactions={this.state.transactions}
               addTransaction={this.addTransaction}
+              deleteTransaction={this.deleteTransaction}
             />
           </FlexColumn>
         </BudgetContainer>

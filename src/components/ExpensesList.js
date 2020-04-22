@@ -2,7 +2,7 @@ import React from "react";
 import ExpenseItemRow from "./ExpenseItemRow";
 import {
   StyledBugetList,
-  StyledBudgetListHeader
+  StyledBudgetListHeader,
 } from "../styles/StyledBudgetsList";
 import AddBudgetItem from "./AddBudgetItem";
 import LoadingSpinner from "./LoadingSpinner";
@@ -18,7 +18,7 @@ export default function ExpensesList(props) {
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        props.budgets.map(budget => {
+        props.budgets.map((budget) => {
           if (budget.type === "debt" && props.loading === false) {
             return (
               <ExpenseItemRow
@@ -33,6 +33,10 @@ export default function ExpensesList(props) {
                 updateBudget={props.updateBudget}
                 deleteBudget={props.deleteBudget}
                 handleSetBudgetItemId={props.handleSetBudgetItemId}
+                calculateTotal={props.calculateTotal}
+                transactions={props.transactions.filter((transaction) => {
+                  return transaction.budgetId === budget._id;
+                })}
               />
             );
           }
