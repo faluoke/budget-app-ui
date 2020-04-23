@@ -2,29 +2,61 @@ import React from "react";
 
 function LandingPage(props) {
   return (
-    <div className="container">
-      <div className="field">
-        <p className="control has-icons-left has-icons-right">
-          <input className="input" type="email" placeholder="Email" />
-          <span className="icon is-small is-left">
-            <i className="fas fa-envelope"></i>
-          </span>
-          <span className="icon is-small is-right">
-            <i className="fas fa-check"></i>
-          </span>
-        </p>
+    <section className="hero is-primary is-fullheight">
+      <div className="hero-body">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-5-tablet is-4-desktop is-3-widescreen">
+              <form action="" className="box">
+                <div className="field">
+                  <label htmlFor="email" className="label">
+                    Email
+                  </label>
+                  <div className="control">
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="e.g. bobsmith@gmail.com"
+                      className="input"
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-envelope"></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="password" className="label">
+                    Password
+                  </label>
+                  <div className="control">
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="*******"
+                      className="input"
+                      required
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fa fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div className="field is-grouped is-grouped-centered">
+                  <label htmlFor="checkbox" className="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    Remember me
+                  </label>
+                </div>
+                <div className="field is-grouped is-grouped-centered">
+                  <button className="button is-success">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="field">
-        <p className="control">
-          <input className="input" type="password" placeholder="Password" />
-        </p>
-      </div>
-      <div className="field">
-        <p className="control">
-          <button className="button is-success">Login</button>
-        </p>
-      </div>
-    </div>
+    </section>
   );
 }
 
