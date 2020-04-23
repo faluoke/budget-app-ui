@@ -7,6 +7,7 @@ export const StyledBugetList = styled.div`
   flex-grow: 1;
   border-radius: 5px;
   margin: 20px 40px;
+  min-width: 200px;
 `;
 
 export const StyledBudgetListHeader = styled.header`
