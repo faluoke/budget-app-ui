@@ -30,7 +30,6 @@ export default class Dashboard extends Component {
       budgetItem: "",
       // status is active when a budget item is clicked on and empty when is not clicked
       status: "",
-      user: "",
     };
   }
 
@@ -135,7 +134,7 @@ export default class Dashboard extends Component {
       )
       .then((response) => {
         if (response.status === 200) {
-          this.fetchBudgets();
+          this.fetchData();
           console.log(response);
         }
       })
@@ -209,7 +208,7 @@ export default class Dashboard extends Component {
       )
       .then((response) => {
         if (response.status === 201) {
-          this.fetchTransactions();
+          this.fetchData();
         }
       })
       .catch((err) => {
@@ -229,7 +228,7 @@ export default class Dashboard extends Component {
       )
       .then((response) => {
         if (response.status === 200) {
-          this.fetchTransactions();
+          this.fetchData();
           console.log(response);
         }
       })
@@ -244,11 +243,15 @@ export default class Dashboard extends Component {
     history.push("/");
   };
 
+  fetchData = () => {
+    this.fetchBudgets();
+    this.fetchTransactions();
+  };
+
   componentDidMount() {
     this._isMounted = true;
     if (this._isMounted === true) {
-      this.fetchBudgets();
-      this.fetchTransactions();
+      this.fetchData();
     }
   }
 
