@@ -29,7 +29,6 @@ export default function AddTransactions(props) {
   };
 
   const handleOnClickAddTransaction = () => {
-    console.log(props.budgetId);
     props.addTransaction(
       inputs.name,
       inputs.type,

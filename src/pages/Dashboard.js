@@ -6,28 +6,31 @@ import ExpensesList from "../components/ExpensesList";
 import BudgetDetail from "../components/BudgetDetail";
 import Transactions from "../components/Transactions";
 import { FlexColumn } from "../styles/StyledBudgetDetail";
+import { Redirect } from "react-router-dom";
 
 const Title = styled.h1`
   font-size: 1.5em;
-  text-align: center;
+  ${"" /* text-align: center; */}
   color: palevioletred;
 `;
 
 const BudgetContainer = styled.div`
   display: flex;
-  z-index= -1;
+  z-index: -1;
 `;
 
-export default class App extends Component {
-  constructor() {
-    super();
+export default class Dashboard extends Component {
+  _isMounted = false;
+  constructor(props) {
+    super(props);
     this.state = {
       budgets: [],
       transactions: [],
       loading: true,
       budgetItem: "",
-      //status is active when a budget item is clicked on and empty when is not clicked
+      // status is active when a budget item is clicked on and empty when is not clicked
       status: "",
+      user: "",
     };
   }
 
@@ -45,7 +48,12 @@ export default class App extends Component {
 
   fetchBudgets = () => {
     axios
-      .get("https://master-budget-app.herokuapp.com/api/budgets")
+      .get("http://localhost:3000/api/budgets", {
+        headers: {
+          "auth-token": localStorage.getItem("userInfo"),
+          "user-id": sessionStorage.getItem("email"),
+        },
+      })
       .then((response) => {
         if (response.data) {
           let budgetsClone = this.state.budgets.slice();
@@ -54,7 +62,6 @@ export default class App extends Component {
             budgets: budgetsClone,
             loading: false,
           });
-          console.log(this.state.budgets);
         }
       })
       .catch((err) => {
@@ -64,12 +71,21 @@ export default class App extends Component {
 
   addBudget = (name, type, planned, received) => {
     axios
-      .post("https://master-budget-app.herokuapp.com/api/budget/create", {
-        name: name,
-        type: type,
-        planned: planned,
-        received: received,
-      })
+      .post(
+        "http://localhost:3000/api/budget/create",
+        {
+          name: name,
+          type: type,
+          planned: planned,
+          received: received,
+          userId: sessionStorage.getItem("email"),
+        },
+        {
+          headers: {
+            "auth-token": localStorage.getItem("userInfo"),
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 201) {
           this.fetchBudgets();
@@ -82,12 +98,20 @@ export default class App extends Component {
 
   updateBudget = (name, type, planned, received, id) => {
     axios
-      .put(`https://master-budget-app.herokuapp.com/api/budget/update/${id}`, {
-        name: name,
-        type: type,
-        planned: planned,
-        received: received,
-      })
+      .put(
+        `http://localhost:3000/api/budget/update/${id}`,
+        {
+          name: name,
+          type: type,
+          planned: planned,
+          received: received,
+        },
+        {
+          headers: {
+            "auth-token": localStorage.getItem("userInfo"),
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           this.fetchBudgets();
@@ -101,7 +125,11 @@ export default class App extends Component {
 
   deleteBudget = (id) => {
     axios
-      .delete(`https://master-budget-app.herokuapp.com/api/budget/delete/${id}`)
+      .delete(`http://localhost:3000/api/budget/delete/${id}`, {
+        headers: {
+          "auth-token": localStorage.getItem("userInfo"),
+        },
+      })
       .then((response) => {
         if (response.status === 200) {
           this.fetchBudgets();
@@ -139,7 +167,12 @@ export default class App extends Component {
 
   fetchTransactions = () => {
     axios
-      .get("https://master-budget-app.herokuapp.com/api/transactions")
+      .get("http://localhost:3000/api/transactions", {
+        headers: {
+          "auth-token": localStorage.getItem("userInfo"),
+          "user-id": sessionStorage.getItem("email"),
+        },
+      })
       .then((response) => {
         if (response.data) {
           let transactionsClone = this.state.transactions.slice();
@@ -148,7 +181,6 @@ export default class App extends Component {
             transactions: transactionsClone,
             loading: false,
           });
-          console.log(this.state.transactions);
         }
       })
       .catch((err) => {
@@ -157,14 +189,21 @@ export default class App extends Component {
   };
 
   addTransaction = (name, type, amount, id) => {
-    debugger;
     axios
-      .post("https://master-budget-app.herokuapp.com/api/transaction/create", {
-        name,
-        type,
-        amount,
-        budgetId: id,
-      })
+      .post(
+        "http://localhost:3000/api/transaction/create",
+        {
+          name,
+          type,
+          amount,
+          budgetId: id,
+        },
+        {
+          headers: {
+            "auth-token": localStorage.getItem("userInfo"),
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 201) {
           this.fetchTransactions();
@@ -177,9 +216,11 @@ export default class App extends Component {
 
   deleteTransaction = (id) => {
     axios
-      .delete(
-        `https://master-budget-app.herokuapp.com/api/transaction/delete/${id}`
-      )
+      .delete(`http://localhost:3000/api/transaction/delete/${id}`, {
+        headers: {
+          "auth-token": localStorage.getItem("userInfo"),
+        },
+      })
       .then((response) => {
         if (response.status === 200) {
           this.fetchTransactions();
@@ -191,17 +232,45 @@ export default class App extends Component {
       });
   };
 
+  handleLogoutOnClick = () => {
+    localStorage.removeItem("userInfo");
+    const { history } = this.props;
+    history.push("/");
+  };
+
   componentDidMount() {
-    this.fetchBudgets();
-    this.fetchTransactions();
+    this._isMounted = true;
+    if (this._isMounted === true) {
+      this.fetchBudgets();
+      this.fetchTransactions();
+    }
   }
 
-  onClick() {}
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
+    if (!localStorage.getItem("userInfo")) {
+      return <Redirect to="/" />;
+    }
     return (
       <>
-        <Title>Your Budget</Title>
+        <nav className="level">
+          <div className="level-item has-text-centered">
+            <Title>Your Budget</Title>
+          </div>
+          <div className="level-right">
+            <button
+              onClick={this.handleLogoutOnClick}
+              style={{ marginRight: "30px" }}
+              className="button"
+            >
+              Logout
+            </button>
+          </div>
+        </nav>
+
         <BudgetContainer>
           <div>
             <IncomesList

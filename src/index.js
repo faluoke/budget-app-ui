@@ -2,23 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import LandingPage from "./pages/LandingPage";
 import * as serviceWorker from "./serviceWorker";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-export default function Router() {
-  return (
-    <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route exact path="/app" component={App} />
-    </Switch>
-  );
-}
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Router />
+    <App />
   </BrowserRouter>,
   document.getElementById("root")
 );
