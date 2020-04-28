@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
 
   fetchBudgets = () => {
     axios
-      .get("http://localhost:3000/api/budgets", {
+      .get("https://master-budget-app.herokuapp.com/api/budgets", {
         headers: {
           "auth-token": localStorage.getItem("userInfo"),
           "user-id": sessionStorage.getItem("email"),
@@ -72,7 +72,7 @@ export default class Dashboard extends Component {
   addBudget = (name, type, planned, received) => {
     axios
       .post(
-        "http://localhost:3000/api/budget/create",
+        "https://master-budget-app.herokuapp.com/api/budget/create",
         {
           name: name,
           type: type,
@@ -99,7 +99,7 @@ export default class Dashboard extends Component {
   updateBudget = (name, type, planned, received, id) => {
     axios
       .put(
-        `http://localhost:3000/api/budget/update/${id}`,
+        `https://master-budget-app.herokuapp.com/api/budget/update/${id}`,
         {
           name: name,
           type: type,
@@ -125,11 +125,14 @@ export default class Dashboard extends Component {
 
   deleteBudget = (id) => {
     axios
-      .delete(`http://localhost:3000/api/budget/delete/${id}`, {
-        headers: {
-          "auth-token": localStorage.getItem("userInfo"),
-        },
-      })
+      .delete(
+        `https://master-budget-app.herokuapp.com/api/budget/delete/${id}`,
+        {
+          headers: {
+            "auth-token": localStorage.getItem("userInfo"),
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           this.fetchBudgets();
@@ -167,7 +170,7 @@ export default class Dashboard extends Component {
 
   fetchTransactions = () => {
     axios
-      .get("http://localhost:3000/api/transactions", {
+      .get("https://master-budget-app.herokuapp.com/api/transactions", {
         headers: {
           "auth-token": localStorage.getItem("userInfo"),
           "user-id": sessionStorage.getItem("email"),
@@ -191,7 +194,7 @@ export default class Dashboard extends Component {
   addTransaction = (name, type, amount, id) => {
     axios
       .post(
-        "http://localhost:3000/api/transaction/create",
+        "https://master-budget-app.herokuapp.com/api/transaction/create",
         {
           name,
           type,
@@ -216,11 +219,14 @@ export default class Dashboard extends Component {
 
   deleteTransaction = (id) => {
     axios
-      .delete(`http://localhost:3000/api/transaction/delete/${id}`, {
-        headers: {
-          "auth-token": localStorage.getItem("userInfo"),
-        },
-      })
+      .delete(
+        `https://master-budget-app.herokuapp.com/api/transaction/delete/${id}`,
+        {
+          headers: {
+            "auth-token": localStorage.getItem("userInfo"),
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           this.fetchTransactions();

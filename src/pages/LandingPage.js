@@ -25,7 +25,7 @@ function LandingPage(props) {
     e.preventDefault();
     const { email, password } = inputs;
     axios
-      .post("http://localhost:3000/auth/login", {
+      .post("https://master-budget-app.herokuapp.com/auth/login", {
         email,
         password,
       })
@@ -54,7 +54,7 @@ function LandingPage(props) {
     }
     const token = localStorage.getItem("userInfo");
     axios
-      .get("http://localhost:3000/auth", {
+      .get("https://master-budget-app.herokuapp.com/auth", {
         headers: {
           "Content-Type": "application/json",
           "auth-token": token,

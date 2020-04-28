@@ -33,12 +33,15 @@ function Registration(props) {
       });
     }
     try {
-      const result = await axios.post("http://localhost:3000/auth/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const result = await axios.post(
+        "https://master-budget-app.herokuapp.com/auth/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        }
+      );
       console.log(result);
       history.push("/");
     } catch (err) {
