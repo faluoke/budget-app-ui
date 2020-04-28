@@ -71,7 +71,7 @@ function LandingPage(props) {
       .catch((err) => {
         setError({
           className: "notification is-danger",
-          message: "An error has occurred, please login again.",
+          message: "Your session has expired, please login again.",
         });
         return setUser({ authenticated: false });
       });
