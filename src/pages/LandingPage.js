@@ -13,6 +13,7 @@ function LandingPage(props) {
     className: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (event) => {
     setInputs({
@@ -23,6 +24,7 @@ function LandingPage(props) {
 
   const loginUser = (e) => {
     e.preventDefault();
+    setLoading(true);
     const { email, password } = inputs;
     axios
       .post("https://master-budget-app.herokuapp.com/auth/login", {
@@ -36,6 +38,7 @@ function LandingPage(props) {
           authenticated: true,
           token: result.data.token,
         });
+        setLoading(false);
         const { history } = props;
         history.push("/app");
       })
@@ -44,6 +47,7 @@ function LandingPage(props) {
           className: "notification is-danger",
           message: err.response.data.message,
         });
+        setLoading(false);
         console.log(err.response.data.message);
       });
   };
@@ -146,7 +150,13 @@ function LandingPage(props) {
                     <Link to="/register" style={{ textDecoration: "none" }}>
                       <button className="button is-primary">Register</button>
                     </Link>
-                    <button className="button is-success">Login</button>
+                    <button
+                      className={`button is-success ${
+                        loading ? "is-loading" : ""
+                      }`}
+                    >
+                      Login
+                    </button>
                   </div>
                 </form>
               </div>
