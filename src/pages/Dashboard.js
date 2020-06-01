@@ -4,8 +4,8 @@ import styled from "styled-components";
 import IncomesList from "../components/IncomesList";
 import ExpensesList from "../components/ExpensesList";
 import BudgetDetail from "../components/BudgetDetail";
+import MobileNav from "../components/MobileNav";
 import Transactions from "../components/Transactions";
-import { FlexColumn } from "../styles/StyledBudgetDetail";
 import { Redirect } from "react-router-dom";
 
 const Title = styled.h1`
@@ -280,48 +280,58 @@ export default class Dashboard extends Component {
           </div>
         </nav>
 
-        <div className="columns">
-          <div className="column is-two-thirds">
-            <IncomesList
-              onStatusChange={this.onStatusChange}
-              status={this.state.status}
-              loading={this.state.loading}
-              budgets={this.state.budgets}
-              addBudget={this.addBudget}
-              updateBudget={this.updateBudget}
-              deleteBudget={this.deleteBudget}
-              handleSetBudgetItemId={this.handleSetBudgetItemId}
-              calculateTotal={this.calculateTotal}
-              transactions={this.state.transactions}
-            />
-            <ExpensesList
-              onStatusChange={this.onStatusChange}
-              status={this.state.status}
-              loading={this.state.loading}
-              budgets={this.state.budgets}
-              addBudget={this.addBudget}
-              updateBudget={this.updateBudget}
-              deleteBudget={this.deleteBudget}
-              handleSetBudgetItemId={this.handleSetBudgetItemId}
-              calculateTotal={this.calculateTotal}
-              transactions={this.state.transactions}
-            />
-          </div>
+        <div className="columns is-mobile">
           <div className="column">
+            <div className="column">
+              <IncomesList
+                onStatusChange={this.onStatusChange}
+                status={this.state.status}
+                loading={this.state.loading}
+                budgets={this.state.budgets}
+                addBudget={this.addBudget}
+                updateBudget={this.updateBudget}
+                deleteBudget={this.deleteBudget}
+                handleSetBudgetItemId={this.handleSetBudgetItemId}
+                calculateTotal={this.calculateTotal}
+                transactions={this.state.transactions}
+              />
+            </div>
+            <div className="column">
+              <ExpensesList
+                onStatusChange={this.onStatusChange}
+                status={this.state.status}
+                loading={this.state.loading}
+                budgets={this.state.budgets}
+                addBudget={this.addBudget}
+                updateBudget={this.updateBudget}
+                deleteBudget={this.deleteBudget}
+                handleSetBudgetItemId={this.handleSetBudgetItemId}
+                calculateTotal={this.calculateTotal}
+                transactions={this.state.transactions}
+              />
+            </div>
+          </div>
+
+          <div className="column is-one-third-fullhd is-two-fifths-widescreen is-two-fifths-desktop desktop">
             {this.state.budgetItem === "" ? (
               ""
             ) : (
-              <BudgetDetail className="column" id={this.state.budgetItem} />
+              <div className="column">
+                <BudgetDetail id={this.state.budgetItem} />
+              </div>
             )}
-            <Transactions
-              className="column"
-              status={this.state.status}
-              budgetItem={this.state.budgetItem}
-              transactions={this.state.transactions}
-              addTransaction={this.addTransaction}
-              deleteTransaction={this.deleteTransaction}
-            />
+
+            <div className="column">
+              <Transactions
+                status={this.state.status}
+                budgetItem={this.state.budgetItem}
+                transactions={this.state.transactions}
+                addTransaction={this.addTransaction}
+                deleteTransaction={this.deleteTransaction}
+              />
+            </div>
           </div>
+          <MobileNav />
         </div>
       </>
     );

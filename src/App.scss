@@ -9,6 +9,8 @@ $control-padding-horizontal: 0.1em;
 @import "../node_modules/bulma/sass/elements/button.sass";
 @import "../node_modules/bulma/sass/components/modal.sass";
 @import "../node_modules//bulma/sass/components/card.sass";
+@import "../node_modules//bulma/sass/components/navbar.sass";
+@import "../node_modules//bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
 @import "../node_modules/bulma/sass/elements/icon";
 @import "../node_modules/bulma/sass/elements/content.sass";
@@ -28,6 +30,20 @@ $control-padding-horizontal: 0.1em;
   }
 }
 
-.card {
-  margin: 50px;
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 820px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .card {
+    margin: 0;
+    flex-direction: row;
+    margin-bottom: 50px;
+  }
 }

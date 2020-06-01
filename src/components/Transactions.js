@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import DeleteTransactionItem from "./DeleteTransactionItem";
+import { BudgetContext } from "./Context/BudgetContext";
 
 import AddTransactions from "./AddTransactions";
 
 export default function Transactions(props) {
   let transactionCount = "";
-
+  const [budget, setBudget] = useContext(BudgetContext);
+  setBudget(props.transactions);
   const displayAddButton = () => {
     if (props.status === "active") {
       return (
