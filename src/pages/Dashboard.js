@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 
 const Title = styled.h1`
   font-size: 1.5em;
-  ${"" /* text-align: center; */}
+  text-align: center;
   color: palevioletred;
 `;
 
@@ -280,8 +280,8 @@ export default class Dashboard extends Component {
           </div>
         </nav>
 
-        <BudgetContainer>
-          <div>
+        <div className="columns">
+          <div className="column is-two-thirds">
             <IncomesList
               onStatusChange={this.onStatusChange}
               status={this.state.status}
@@ -307,21 +307,22 @@ export default class Dashboard extends Component {
               transactions={this.state.transactions}
             />
           </div>
-          <FlexColumn>
+          <div className="column">
             {this.state.budgetItem === "" ? (
               ""
             ) : (
-              <BudgetDetail id={this.state.budgetItem} />
+              <BudgetDetail className="column" id={this.state.budgetItem} />
             )}
             <Transactions
+              className="column"
               status={this.state.status}
               budgetItem={this.state.budgetItem}
               transactions={this.state.transactions}
               addTransaction={this.addTransaction}
               deleteTransaction={this.deleteTransaction}
             />
-          </FlexColumn>
-        </BudgetContainer>
+          </div>
+        </div>
       </>
     );
   }

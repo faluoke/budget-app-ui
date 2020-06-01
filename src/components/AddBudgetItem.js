@@ -1,5 +1,5 @@
 import React from "react";
-import StyledBudget, { StyledButton } from "../styles/StyledBudget";
+import { StyledButton } from "../styles/StyledBudget";
 
 export default function AddBudgetItem(props) {
   const handleOnClick = () => {
@@ -10,10 +10,10 @@ export default function AddBudgetItem(props) {
     }
   };
   return (
-    <StyledBudget>
-      <div>
-        <StyledButton onClick={handleOnClick}>Add Item</StyledButton>
-      </div>
-    </StyledBudget>
+    <footer className="card-footer">
+      <StyledButton className="card-footer-item" onClick={handleOnClick}>
+        Add Item
+      </StyledButton>
+    </footer>
   );
 }

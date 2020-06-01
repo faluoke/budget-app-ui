@@ -5,7 +5,7 @@ import Registration from "./pages/Registration";
 import Dashboard from "./pages/Dashboard";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { UserProvider } from "./components/Context/UserContext";
-import "./App.sass";
+import "./App.scss";
 
 export const UserContext = React.createContext([]);
 

@@ -1,13 +1,12 @@
 import React from "react";
 import {
-  StyledBugetList,
   StyledBudgetListHeader,
-  StyledBudgetDetailH3
+  StyledBudgetDetailH3,
 } from "../styles/StyledBudgetsList";
 
 export default function BudgetDetail(props) {
   return (
-    <StyledBugetList>
+    <div className="card">
       <StyledBudgetListHeader>
         <StyledBudgetDetailH3>
           <small>{props.id.type ? props.id.type : "Type"}</small>
@@ -18,13 +17,15 @@ export default function BudgetDetail(props) {
           <span>{props.id.planned}</span>
         </StyledBudgetDetailH3>
       </StyledBudgetListHeader>
-      <div>
-        {props.id.received
-          ? props.id.type === "income"
-            ? `$${props.id.received} received`
-            : `$${props.id.received} spent`
-          : ""}
+      <div className="card-content">
+        <div className="content is-medium">
+          {props.id.received
+            ? props.id.type === "income"
+              ? `$${props.id.received} received`
+              : `$${props.id.received} spent`
+            : ""}
+        </div>
       </div>
-    </StyledBugetList>
+    </div>
   );
 }

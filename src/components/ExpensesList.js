@@ -1,20 +1,16 @@
 import React from "react";
 import ExpenseItemRow from "./ExpenseItemRow";
-import {
-  StyledBugetList,
-  StyledBudgetListHeader,
-} from "../styles/StyledBudgetsList";
 import AddBudgetItem from "./AddBudgetItem";
 import LoadingSpinner from "./LoadingSpinner";
 
 export default function ExpensesList(props) {
   return (
-    <StyledBugetList>
-      <StyledBudgetListHeader>
-        <h1>Expenses</h1>
-        <h1>Planned</h1>
-        <h1>Spent</h1>
-      </StyledBudgetListHeader>
+    <div className="card">
+      <header className="card-header">
+        <h1 className="card-header-title">Expenses</h1>
+        <h1 className="card-header-title">Planned</h1>
+        <h1 className="card-header-title">Spent</h1>
+      </header>
       {props.loading ? (
         <LoadingSpinner />
       ) : (
@@ -46,6 +42,6 @@ export default function ExpensesList(props) {
       <AddBudgetItem addBudget={props.addBudget} type="debt">
         Add
       </AddBudgetItem>
-    </StyledBugetList>
+    </div>
   );
 }

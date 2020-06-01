@@ -1,16 +1,12 @@
 import styled from "styled-components";
 
 export const FlexColumn = styled.div`
-  display: flex;
+  ${"" /* display: flex;
   flex-grow: 1;
   width: 20px;
   flex-direction: column;
   justify-content: space-around;
-  margin: 10px;
-  .transactions {
-    overflow: auto;
-    max-height: 200px;
-  }
+  margin: 10px; */}
 `;
 
 export const Button = styled.button`
