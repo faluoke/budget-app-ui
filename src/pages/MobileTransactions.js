@@ -22,7 +22,6 @@ function MobileTransactions() {
           let transactionsClone = response.data.slice();
           transactionsClone = response.data;
           setTransactions({ loading: false, data: transactionsClone });
-          console.log(transactions);
         }
       })
       .catch((err) => {
